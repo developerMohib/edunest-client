@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Roboto } from "next/font/google";
 import "./globals.css";
+import Navber from "@/components/Navber";
+import Footer from "@/components/Footer";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -70,7 +72,11 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${roboto.variable} antialiased`}
       >
-        {children}
+        <Navber />
+        <div>
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
