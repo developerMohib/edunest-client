@@ -13,10 +13,10 @@ const NameLogo: React.FC = () => {
                     height={500}
                     className="w-10 h-10 rounded-full mr-2"
                 />
-                <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="text-xl font-semibold text-eduGreen">
                     Edu
                 </span>
-                <span className="text-lg font-semibold text-gray-900 dark:text-white">
+                <span className="text-xl font-semibold text-eduRed">
                     Nest
                 </span>
             </Link>

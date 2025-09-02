@@ -13,7 +13,7 @@ const navLinks = [
 
 const Footer: React.FC = () => {
     return (
-        <footer className="relative bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden">
+        <footer className="relative bg-gradient-to-br text-white overflow-hidden">
             {/* Animated background elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
                 <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500 rounded-full filter blur-3xl animate-float1" />
@@ -26,9 +26,7 @@ const Footer: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">
                     {/* Logo/Name section with interactive effect */}
                     <div className="group">
-
                         <NameLogo />
-
                         <p className="text-gray-300 mb-6">Innovating digital experiences one line of code at a time.</p>
                         {/* Social media with hover glow */}
                         <div className="flex space-x-4">

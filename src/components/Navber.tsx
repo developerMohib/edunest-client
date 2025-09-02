@@ -16,7 +16,7 @@ const navLinks = [
 const Navber: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     return (
-        <header className="bg-white/80 dark:bg-black/80 backdrop-blur-sm sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-700">
+        <header className="backdrop-blur-sm sticky top-0 z-50 w-full shadow">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
 
@@ -29,7 +29,7 @@ const Navber: React.FC = () => {
                             <Link
                                 key={link.label}
                                 href={link.href}
-                                className="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
+                                className="text-md font-medium text-eduGray hover:text-eduBlack transition-colors duration-300"
                             >
                                 {link.label}
                             </Link>
@@ -37,8 +37,8 @@ const Navber: React.FC = () => {
                     </nav>
 
                     {/* CTA Button, Theme Toggle and Mobile Menu Toggle */}
-                    <div className="flex items-center gap-4">
-                        <Link className="w-full mt-2 text-center items-center justify-center rounded-md text-sm font-medium h-10 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 block transition-colors duration-300" href={'/signin'}> Get Started
+                    <div className="flex items-center gap-4 ">
+                        <Link className="w-full text-center items-center justify-center rounded-md text-base font-semibold tracking-wide px-4 py-2 text-eduWhite bg-eduRed  hover:bg-eduGreen transition-colors duration-300 hidden md:block" href={'/signin'}> Let&apos;s Go
                         </Link>
 
                         {/* Theme Toggle Button */}
@@ -48,7 +48,7 @@ const Navber: React.FC = () => {
                         <div className="md:hidden">
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 dark:focus:ring-gray-400 transition-colors duration-300"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-eduGray focus:outline-none focus:ring-2 focus:ring-inset transition-colors duration-300"
                                 aria-expanded={isMenuOpen}
                             >
                                 <span className="sr-only">Open main menu</span>
@@ -62,18 +62,18 @@ const Navber: React.FC = () => {
 
             {/* Mobile Menu Dropdown (Sheet) */}
             {isMenuOpen && (
-                <div className="md:hidden border-t border-gray-200 dark:border-gray-700" id="mobile-menu">
+                <div className="md:hidden border-t border-eduBorder absolute left-0 top-100% bg-eduBlack w-full" id="mobile-menu">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.label}
                                 href={link.href}
-                                className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                                className="text-eduWhite block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
                             >
                                 {link.label}
                             </Link>
                         ))}
-                        <Link className="w-full mt-2 text-center items-center justify-center rounded-md text-sm font-medium h-10 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 block transition-colors duration-300" href={'/signin'}> Get Started
+                        <Link className="w-full text-center items-center justify-center rounded-md text-sm font-semibold tracking-wide px-4 py-2 bg-eduRed text-eduWhite hover:bg-eduGreen block transition-colors duration-300" href={'/signin'}> Let&apos;s Go
                         </Link>
                     </div>
                 </div>

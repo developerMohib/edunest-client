@@ -73,7 +73,7 @@ export default function RootLayout({
         className={`${outfit.variable} ${roboto.variable} antialiased`}
       >
         <Navber />
-        <div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {children}
         </div>
         <Footer />
