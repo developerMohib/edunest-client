@@ -3,23 +3,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaHeart, FaShoppingCart, FaStar } from 'react-icons/fa';
+import { GiJumpAcross } from "react-icons/gi";
 
 const PopularCourse: React.FC = () => {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8">
+    <div className="py-12">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-12 text-eduBlack">
-          Featured Products
+          Top selling Courses
         </h1>
 
         {/* Grid of Product Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
           {products?.map((product) => (
             <div
               key={product.id}
-              className="group relative rounded-xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+              className="group relative shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-eduBorder/20 rounded-md"
             >
-              <div className="relative overflow-hidden h-80">
+              <div className="relative overflow-hidden h-60">
                 <Image
                   src={product.image}
                   alt={product.title}
@@ -65,27 +66,6 @@ const PopularCourse: React.FC = () => {
                   )}
 
                 </div>
-
-                <div className="mt-3 flex items-center">
-                  <div className="flex text-yellow-400">
-                    {Array.from({ length: 5 }).map((_, i) => {
-                      const fullStars = Math.floor(product.rating);
-                      const halfStar = product.rating % 1 !== 0 && i === fullStars;
-                      return (
-                        <i
-                          key={i}
-                          className={
-                            i < fullStars
-                              ? "fas fa-star"
-                              : halfStar
-                                ? "fas fa-star-half-alt"
-                                : "far fa-star"
-                          }
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
               </div>
               <div className='p-5'>
                 <Link href={`/course-details/${product.id}`}>
@@ -102,15 +82,17 @@ const PopularCourse: React.FC = () => {
         <div className="mt-16 bg-gradient-to-r from-eduGreen/20 to-eduRed/20 rounded-2xl overflow-hidden shadow-2xl">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-              <span className="text-eduBlack font-semibold mb-2">
-                LIMITED EDITION
+              <span className="text-eduBlack font-semibold mb-2 tracking-widest">
+                Blooming Out - Let&apos;s Enroll
               </span>
+              <h2 className="text-sm font-normal text-eduBlack mb-4">
+                Best Selling Ever
+              </h2>
               <h2 className="text-3xl font-bold text-eduBlack mb-4">
-                Premium Wireless Earbuds
+                Full Stack Web Development
               </h2>
               <p className="text-eduBlack mb-6">
-                Experience crystal-clear sound with our latest noise-cancelling
-                technology and 24-hour battery life.
+                Learn MERN stack (MongoDB, Express, React, Node.js) with real-world projects.
               </p>
               <div className="flex items-center mb-6">
                 <div className="text-yellow-300 mr-2">
@@ -130,14 +112,14 @@ const PopularCourse: React.FC = () => {
                 </span>
               </div>
               <button className="bg-eduBlack text-eduWhite hover:text-eduBlack py-3 px-6 rounded-lg font-bold hover:bg-eduRed transition-colors duration-300 w-fit flex items-center gap-2 cursor-pointer">
-                <FaShoppingCart /> Shop Now
+                <GiJumpAcross /> Let&apos;s Jump
               </button>
             </div>
             <div className="md:w-1/2 flex items-center justify-center p-8">
               <Image
-                src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1032&q=80"
-                alt="Wireless Earbuds"
-                className="max-h-80 object-contain" width={500} height={500}
+                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1068&q=80"
+                alt="Full stack web development"
+                className="max-h-80 object-contain rounded-md" width={500} height={500}
               />
             </div>
           </div>

@@ -1,9 +1,10 @@
+import SignUp from '@/components/SignUp';
 import React from 'react';
 
 const page: React.FC = () => {
     return (
         <div>
-            <h1>This is sign up page</h1>
+            <SignUp />
         </div>
     );
 };

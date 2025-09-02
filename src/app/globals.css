@@ -14,7 +14,7 @@
   --color-edugray: #4a5568; /* Tailwind gray-700 */
   --color-eduwhite: #ffffff;
   --color-eduborder: #d1d5db; /* Tailwind gray-300 */
-  --color-edublue: #4338CA; /* Tailwind blue-600 */
+  --color-edublue: #1ec8c8; /* Tailwind blue-600 */
 }
 /* Theme variables for Tailwind */
 @theme inline {
