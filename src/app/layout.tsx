@@ -19,7 +19,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "EduNest - Learn, Grow, and Achieve",
+  title: "EduNest - Learn Grow and Achieve",
   description:
     "EduNest is a modern Learning Management System (LMS) where learners can explore courses, track progress, and access interactive study materials.",
   keywords: [
