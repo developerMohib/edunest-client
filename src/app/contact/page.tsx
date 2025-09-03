@@ -1,9 +1,10 @@
+import CommingSoon from '@/components/CommingSoon';
 import React from 'react';
 
-const page : React.FC = () => {
+const page: React.FC = () => {
     return (
         <div>
-            <h1>This is contact page</h1>
+            <CommingSoon />
         </div>
     );
 };

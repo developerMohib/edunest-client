@@ -28,7 +28,7 @@ const PopularCourse: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-4 right-4">
-                  <button className="bg-white/90 text-gray-800 p-2 rounded-full shadow-md transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500 hover:text-white">
+                  <button className="bg-eduWhite text-eduGray p-2 rounded-full shadow-md transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hover:bg-eduRed hover:text-eduWhite cursor-pointer">
                     <FaHeart />
                   </button>
                 </div>
@@ -46,26 +46,25 @@ const PopularCourse: React.FC = () => {
                 )}
               </div>
               <div className="px-5 pt-5">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-lg font-bold text-eduBlack">
-                      {product.title}
-                    </h3>
-                    <p className="text-eduGray text-sm">{product.description}</p>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-lg font-bold text-eduBlack">
+                        {product.title}
+                      </h3>
+                      <p className="text-eduGray text-sm">{product.description}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="text-eduGreen gap-x-2 flex items-center">
-                  <p className="text-lg font-bold text-eduBlue">
-                    {product.price}
-                  </p>
-                  {product.oldPrice && (
-                    <p className="text-xs text-eduGray line-through">
-                      {product.oldPrice}
+                  <div className="text-eduGreen gap-x-2 flex items-center">
+                    <p className="text-lg font-bold text-eduBlue">
+                      {product.price}
                     </p>
-                  )}
-
-                </div>
+                    {product.oldPrice && (
+                      <p className="text-xs text-eduGray line-through">
+                        {product.oldPrice}
+                      </p>
+                    )}
+                  </div>
               </div>
               <div className='p-5'>
                 <Link href={`/course-details/${product.id}`}>
@@ -75,7 +74,7 @@ const PopularCourse: React.FC = () => {
                 </Link>
               </div>
             </div>
-          ))}         
+          ))}
         </div>
 
         {/* Featured Floating Product */}
