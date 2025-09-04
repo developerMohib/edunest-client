@@ -4,24 +4,61 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from 'react-icons/fa6';
+export const metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
+    title: 'Sign Up - Your App',
+    description: 'Create an account to access our services.',
+    openGraph: {
+        title: 'Sign Up - Your App',
+        description: 'Create an account to access our services.',
+        url: '/signup',
+        images: [
+            {
+                url: '/og-image.jpg', // Relative path resolved by metadataBase
+                width: 1200,
+                height: 630,
+                alt: 'Sign Up Page Image',
+            },
+        ],
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Sign Up - Your App',
+        description: 'Create an account to access our services.',
+        images: ['/og-image.jpg'], // Relative path resolved by metadataBase
+    },
+};
 
 const SignUp = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+
     const togglePassword = () => {
         setPasswordVisible(!passwordVisible);
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Form submitted!");
+        setLoading(true);
+
+        // Extract form data
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get('name') as string;
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+        console.log("fff", formData)
+
+        // Log form values (or process them as needed)
+        console.log('Form submitted with values:', { name, email, password });
         setLoading(false)
+
     };
     return (
         <div className="p-4">
             <div className="grid grid-cols-2">
                 <div className='grid-cols-1'>
-                    <Image src={"/images/log.in.page.png"} alt='Login image' width={500} height={500} />
+                    <Image src={"/images/log.in.page.png"} alt='Login image' width={500} className='h-auto w-full' height={500} />
                 </div>
 
                 <div className='grid-cols-1'>
@@ -47,6 +84,7 @@ const SignUp = () => {
                                         placeholder="Your Name"
                                         required
                                         type="name"
+                                        name='name'
                                     />
                                 </div>
 
@@ -60,6 +98,7 @@ const SignUp = () => {
                                         placeholder="name@example.com"
                                         required
                                         type="email"
+                                        name='email'
                                     />
                                 </div>
                                 <div className="grid gap-2">
@@ -77,14 +116,16 @@ const SignUp = () => {
                                             id="password"
                                             required
                                             type={passwordVisible ? 'text' : 'password'}
+                                            name='password'
                                         />
                                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                                            {passwordVisible ? <FaEye onClick={togglePassword} /> : <FaEyeSlash onClick={togglePassword} />}                                           
+                                            {passwordVisible ? <FaEye onClick={togglePassword} /> : <FaEyeSlash onClick={togglePassword} />}
                                         </div>
                                     </div>
                                 </div>
-                                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-eduBlue text-primary-foreground hover:bg-eduBlue/90 h-10 px-4 py-2 w-full cursor-pointer">
-                                    {loading ? "Logging..." : "Sign In"}
+                                <button disabled={loading}
+                                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-eduBlue text-primary-foreground hover:bg-eduBlue/90 h-10 px-4 py-2 w-full cursor-pointer">
+                                    {loading ? "Creating Account..." : "Sign Up"}
                                 </button>
                             </div>
                         </form>

@@ -3,6 +3,7 @@ import { Outfit, Roboto } from "next/font/google";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -77,6 +78,10 @@ export default function RootLayout({
           {children}
         </div>
         <Footer />
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
       </body>
     </html>
   );

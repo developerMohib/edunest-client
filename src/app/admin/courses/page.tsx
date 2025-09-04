@@ -26,8 +26,8 @@ export default function AdminCourses() {
                 <div key={course._id} className="border rounded-lg shadow p-4">
                     <Image src={course.thumbnail} alt={course.title} className="w-full h-40 object-cover rounded" width={500} height={500} />
                     <h2 className="text-xl font-semibold mt-3">{course.title}</h2>
-                    <p className="text-gray-700 font-medium">${course.price}</p>
-                    <p className="mt-2 text-gray-600">{course.description}</p>
+                    <p className="text-eduGray font-medium">${course.price}</p>
+                    <p className="mt-2 text-eduGray">{course.description}</p>
                 </div>
             ))}
         </div>
