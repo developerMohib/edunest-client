@@ -118,7 +118,7 @@ const PopularCourse: React.FC = () => {
               <Image
                 src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1068&q=80"
                 alt="Full stack web development"
-                className="max-h-80 object-contain rounded-md" width={500} height={500}
+                className="max-h-80 w-auto object-contain rounded-md" width={500} height={500}
               />
             </div>
           </div>

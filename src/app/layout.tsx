@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description:
       "Discover courses, manage your learning progress, and unlock knowledge with EduNest LMS.",
     // url: "https://edunest.vercel.app",
-    url: "https://www.google.com",
+    url: "http://localhost:3000",
     siteName: "EduNest",
     images: [
       {

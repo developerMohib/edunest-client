@@ -21,7 +21,7 @@ const SignIn = () => {
         <div className="p-4">
             <div className="grid grid-cols-2">
                 <div className='grid-cols-1'>
-                    <Image src={"/images/log.in.page.png"} alt='Login image' width={500} height={500} />
+                    <Image src={"/images/log.in.page.png"} alt='Login image' width={500} className='h-auto w-full' height={500} />
                 </div>
 
                 <div className='grid-cols-1'>

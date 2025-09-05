@@ -1,7 +1,10 @@
 "use client"
+import instance from '@/utils/axiosInstance';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from 'react-icons/fa6';
 export const metadata = {
@@ -33,12 +36,13 @@ export const metadata = {
 const SignUp = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const router = useRouter()
 
     const togglePassword = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
 
@@ -47,10 +51,23 @@ const SignUp = () => {
         const name = formData.get('name') as string;
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
-        console.log("fff", formData)
-
+        const image = "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp";
+        const role = "student"
         // Log form values (or process them as needed)
-        console.log('Form submitted with values:', { name, email, password });
+        const userData = { name, email, password, image, role }
+        
+        try {
+            const response = await instance.post('/signup/api',userData)
+            console.log('Sign up successful:', response.data);
+            // Handle successful sign-up (e.g., redirect, show message)
+            if (response.data.success) {
+                toast.success('Sign up successful! Please sign in.');
+                // Redirect to sign-in page after successful sign-up
+                router.push('/signin');
+            }
+        } catch (error) {
+            console.error('Error during sign up:', error);
+        }
         setLoading(false)
 
     };
