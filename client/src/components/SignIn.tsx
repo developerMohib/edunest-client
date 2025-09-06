@@ -1,21 +1,44 @@
 "use client"
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const SignIn = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const callbackUrl = useSearchParams().get('callbackUrl') || '/';
+
     const togglePassword = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("Form submitted!");
-        setLoading(false)
-    };
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setLoading(true);
+  const formData = new FormData(e.currentTarget);
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+  const user = { email, password };
+  try {
+    const response = await signIn('credentials', { ...user, redirect: false, callbackUrl });
+    console.log('response fgchfgh', response);
+    if (response?.error) {
+      // Handle error (e.g., show message)
+      console.error('Sign in error:', response.error);
+    } else if (response?.ok) {
+      // Redirect or update UI on success
+      router.push(callbackUrl);
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
     return (
         <div className="p-4">
@@ -37,18 +60,6 @@ const SignIn = () => {
                     <div className="grid gap-6">
                         <form onSubmit={handleSubmit}>
                             <div className="grid gap-4">
-                                <div className="grid gap-2">
-                                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="name">
-                                        Name
-                                    </label>
-                                    <input
-                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  placeholder:text-muted-foreground"
-                                        id="name"
-                                        placeholder="Your Name"
-                                        required
-                                        type="name"
-                                    />
-                                </div>
 
                                 <div className="grid gap-2">
                                     <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="email">
@@ -89,12 +100,12 @@ const SignIn = () => {
                             </div>
                         </form>
                         <div className="relative">
-                            <div className="text-xs">  
-                                 <h3 className="flex items-center w-full">
-                                <span className="flex-grow bg-eduGray/30 rounded h-[1px]" />
-                                <span className="mx-3 text-lg font-medium"> Or continue with</span>
-                                <span className="flex-grow bg-eduGray/30 rounded h-[1px]" />
-                            </h3>
+                            <div className="text-xs">
+                                <h3 className="flex items-center w-full">
+                                    <span className="flex-grow bg-eduGray/30 rounded h-[1px]" />
+                                    <span className="mx-3 text-lg font-medium"> Or continue with</span>
+                                    <span className="flex-grow bg-eduGray/30 rounded h-[1px]" />
+                                </h3>
 
                             </div>
                         </div>

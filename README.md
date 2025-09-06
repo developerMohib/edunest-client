@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# EduNest
 
-First, run the development server:
+## Objective
+A robust **Express** application built with **TypeScript** and **MongoDB (Mongoose)** to manage a LMS. The API enables CRUD operations on products (course),
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Website Live Link**: [link](hello)
+- **GitHub Client Repo**: [link](hello)
+## Features ✨
+- **Course Management**: Add, read, update, and delete courses by admin with detailed attributes like etc.
+- **User Role** : User can request to admin to be instructor (upcomming)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Authentication ✨
+- **User**: Admin and User role based login
+- **Managmet**: Admin can manage all thing like read, add, update and delete.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+### Admin Credentials ✨
+ ```
+ Email: "edunestadmin@gmail.com",
+ Password: "admin1234"
+ ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack 🛠️
+- **Frontend**: Nextjs, Tailwindcss, TypeScript
+- **Backend**: Node.js, Express.js, TypeScript
+- **Database**: MongoDB (via Mongoose).
+- **Tools**: ESLint, Prettier, Nodemon, TypeScript Compiler
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project API Root
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Bicycle APIs
+- **Create Course API**  
+  - **Endpoint**: `/api/course`  
+  - **Method**: `POST` 
+  - **Request Body**: 
+    ```json
+    {
+        "name": "need to write name",
+        "author": "ayman sadik",
+        "price": 300,
+        "type": "speeking",
+        "description": "speeking test and performance.",
+    }
+
+
+- **Get All course API**  
+  - **Endpoint**: `/api/courses`  
+  - **Method**: `GET`  
+
+- **Get Single Bicycle API**  
+  - **Endpoint**: `/api/course/:courseId`  
+  - **Method**: `GET`  
+
+- **Update Bicycle API**  
+  - **Endpoint**: `/api/course/:courseId`  
+  - **Method**: `PATCH` 
+  - **Request Body**: 
+    ```json
+    { 
+        "price": 350,
+        "type": "listening"
+    } 
+
+- **Delete Bicycle API**  
+  - **Endpoint**: `/api/course/:courseId`  
+  - **Method**: `DELETE`  
+
+---
+
+## Project Setup ⚙️
+
+### Prerequisites
+1. **Node.js**
+2. **MongoDB** (locally or a cloud-based service like MongoDB Atlas)
+3. **Package Manager**: npm
+
+### Installation Steps
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/developerFarukk/edunest.git
+   cd edunest
+   ```
+
+2. **Install Dependencies**  
+   -- Right path 
+   ```bash
+   npm i
+   ```
+
+3. **Environment Setup**  
+   Create a `.env` or `.env.local` (frontend) file in the root directory. Refer to `.env.example` for guidance:
+
+   ```
+  NODE_ENV=development
+  DATABASE_URL=<mongodb+srv://<Username>:<password>@****.***.mongodb.net/<database-name>?***=true&w=***&appName=project-name>
+
+  JWT_ACCESS_SECRET=<"Inpute secret key">
+  JWT_ACCESS_EXPIRES_IN=<"Inpute time duration, e.g., 2h">
+  PORT=5000
+
+  NEXTAUTH_URL=http://localhost:3000
+  SALTROUNDS=<"input round number">
+
+
+   ```
+
+   Refer to `.env.example` for additional configuration options.
+
+4. **Start the Development Server**  
+   
+    First, run the development server:
+
+    ```bash
+    npm run dev
+    ```
+    The app will run at `http://localhost:5000`.
+
+📬 **Contact**  
+For issues or inquiries, reach out to [mohibullah mohim](mailto:mohibullahmohim2020@gmail.com). Thank you 💜

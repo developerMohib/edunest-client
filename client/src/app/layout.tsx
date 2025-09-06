@@ -4,6 +4,7 @@ import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import AuthProvider from "@/authprovider/AuthProvider";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -71,17 +72,15 @@ export default function RootLayout({
   return (
     <html data-theme="light" lang="en">
       <body
-        className={`${outfit.variable} ${roboto.variable} antialiased`}
-      >
-        <Navber />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {children}
-        </div>
-        <Footer />
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
+        className={`${outfit.variable} ${roboto.variable} antialiased`}>
+        <AuthProvider >
+          <Navber />
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {children}
+          </div>
+          <Footer />
+          <Toaster position="top-right" reverseOrder={false} />
+        </AuthProvider>
       </body>
     </html>
   );

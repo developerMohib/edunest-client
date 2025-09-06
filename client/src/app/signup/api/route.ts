@@ -4,7 +4,6 @@ import { User } from "@/models/userModel";
 export const POST = async (request: Request) => {
   try {
     const body = await request.json();
-    console.log("Received sign-up data:", body);
     const { name, email, password, image, role } = body;
 
     await connectDB();

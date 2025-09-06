@@ -10,6 +10,6 @@ interface Config {
 const config: Config = {
   databaseUrl: process.env.MONGODB_URI,
   salt: process.env.SALTROUNDS ? parseInt(process.env.SALTROUNDS, 10) : 14,
-  nextauthSecret: process.env.AUTH_SECRET,
+  nextauthSecret: process.env.NEXTAUTH_SECRET,
 };
 export default config;

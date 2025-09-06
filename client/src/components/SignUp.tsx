@@ -1,7 +1,6 @@
 "use client"
 import { getErrorMessage } from '@/utils/axiosErrorHanlder';
 import instance from '@/utils/axiosInstance';
-import { AxiosError } from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
