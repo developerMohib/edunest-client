@@ -38,7 +38,7 @@ const Navber: React.FC = () => {
 
                     {/* CTA Button, Theme Toggle and Mobile Menu Toggle */}
                     <div className="flex items-center gap-4 ">
-                        <Link className="w-full text-center items-center justify-center rounded-md text-base font-semibold tracking-wide px-4 py-2 text-eduWhite bg-eduRed  hover:bg-eduGreen transition-colors duration-300 hidden md:block" href={'/signin'}> Let&apos;s Go
+                        <Link className="w-full text-center items-center justify-center rounded-md text-base font-semibold tracking-wide px-4 py-2 text-eduWhite bg-eduRed  hover:bg-eduGreen transition-colors duration-300 hidden md:block" href={'/signin'}> Login 
                         </Link>
 
                         {/* Theme Toggle Button */}
@@ -73,7 +73,7 @@ const Navber: React.FC = () => {
                                 {link.label}
                             </Link>
                         ))}
-                        <Link className="w-full text-center items-center justify-center rounded-md text-sm font-semibold tracking-wide px-4 py-2 bg-eduRed text-eduWhite hover:bg-eduGreen block transition-colors duration-300" href={'/signin'}> Let&apos;s Go
+                        <Link className="w-full text-center items-center justify-center rounded-md text-sm font-semibold tracking-wide px-4 py-2 bg-eduRed text-eduWhite hover:bg-eduGreen block transition-colors duration-300" href={'/signin'}> Login
                         </Link>
                     </div>
                 </div>

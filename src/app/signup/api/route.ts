@@ -11,7 +11,6 @@ export const POST = async (request: Request) => {
 
     // Checking if user already exists
     const existingUser = await User.findOne({ email });
-    console.log("Existing user check:", existingUser);
     if (existingUser) {
       return new Response(
         JSON.stringify({
@@ -40,7 +39,7 @@ export const POST = async (request: Request) => {
   } catch (error) {
     console.error("Error processing sign-up:", error);
     return new Response(
-      JSON.stringify({ success: false, message: "Internal Server Error" }),
+      JSON.stringify({ success: false, message: "Internal Server Error ii", data: error }),
       { status: 500 }
     );
   }

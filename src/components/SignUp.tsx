@@ -1,5 +1,7 @@
 "use client"
+import { getErrorMessage } from '@/utils/axiosErrorHanlder';
 import instance from '@/utils/axiosInstance';
+import { AxiosError } from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -55,18 +57,20 @@ const SignUp = () => {
         const role = "student"
         // Log form values (or process them as needed)
         const userData = { name, email, password, image, role }
-        
+
         try {
-            const response = await instance.post('/signup/api',userData)
+            const response = await instance.post('/signup/api', userData)
             console.log('Sign up successful:', response.data);
             // Handle successful sign-up (e.g., redirect, show message)
-            if (response.data.success) {
+            if (response?.data.success) {
                 toast.success('Sign up successful! Please sign in.');
                 // Redirect to sign-in page after successful sign-up
                 router.push('/signin');
             }
         } catch (error) {
-            console.error('Error during sign up:', error);
+            const message = getErrorMessage(error);
+            console.error("Signup error:", message, error);
+            toast.error(message);
         }
         setLoading(false)
 
