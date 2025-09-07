@@ -73,14 +73,14 @@ export default function RootLayout({
     <html data-theme="light" lang="en">
       <body
         className={`${outfit.variable} ${roboto.variable} antialiased`}>
-        <AuthProvider >
+        
           <Navber />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {children}
           </div>
           <Footer />
           <Toaster position="top-right" reverseOrder={false} />
-        </AuthProvider>
+        
       </body>
     </html>
   );

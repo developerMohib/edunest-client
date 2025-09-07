@@ -1,67 +1,72 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth, { Account, Profile, User } from "next-auth";
+import { CredentialInput } from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import { AdapterUser } from "next-auth/adapters";
+import connectDB from "@/lib/db";
+import Facebook from "next-auth/providers/facebook";
 
-const authOptions = {
-  debug: process.env.NODE_ENV === "development",
+
+interface SignInParams {
+  user: AdapterUser | User;
+  account: Account | null;
+  profile?: Profile | undefined;
+  email?: {
+    verificationRequest?: boolean;
+  };
+  credentials?: Record<string, CredentialInput>;
+}
+
+const { db } = (await connectDB()) || { db: null };
+if (!db) throw new Error("Failed to connect to the database");
+// const userCollection = db.collection("Users");
+
+export const authOptions = {
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60,
   },
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: {  },
-        password: {  },
-      },
-      async authorize(credentials) {
-        try {
-          console.log("Credentials:", credentials);
-
-          // Dummy login check
-          if (
-            credentials?.email === "admin@example.com" &&
-            credentials?.password === "password"
-          ) {
-            return { id: "1", name: "Admin", email: "admin@example.com" };
-          }
-
-          return null; // invalid login
-        } catch (error) {
-          console.error("Authorize error:", error);
-          return null;
-        }
-      },
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Facebook({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
-
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        token.id = user.id ?? user.id;
         token.email = user.email;
       }
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user = {
-          id: token.id as string,
-          email: token.email as string,
-          name: token.name as string,
-        };
+      if (token && session.user) {
+        session.user.id = (token.id ?? token.id) as string;
+        session.user.email = token.email as string;
       }
       return session;
     },
+    async signIn({ user, account }: SignInParams) {
+      console.log("user 97", user, account);
+      if (
+        account?.provider === "google" ||
+        account?.provider === "facebook" 
+      ) {
+        // here you can check if the user exists in your database
+        }  else {
+        return true;
+      }
+    },
   },
-
-  secret: process.env.NEXTAUTH_SECRET,
+   secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
     signIn: "/signin",
   },
 };
-
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
