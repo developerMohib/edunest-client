@@ -1,28 +1,47 @@
-// /lib/seedData.ts
+import { api } from './axiosInstance';
+import { Course, Lecture, Module } from './types';
 
-export const courses = [
-  {
-    title: "Full Stack Web Development",
-    description: "Learn MERN stack with real-world projects.",
-    price: 199,
-    thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1068&q=80",
+
+export const coursesApi = {
+  getCourses: async (): Promise<Course[]> => {
+    const response = await api.get('/courses');
+    return response.data;
   },
-  {
-    title: "React Mastery",
-    description: "Dive deep into React, Hooks, Context API, and Next.js.",
-    price: 149,
-    thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1068&q=80",
+
+  getCourse: async (id: string): Promise<Course> => {
+    const response = await api.get(`/courses/${id}`);
+    return response.data;
   },
-  {
-    title: "Node.js & Express",
-    description: "Backend fundamentals with Node.js, Express, and REST APIs.",
-    price: 129,
-    thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1068&q=80",
+
+  getInstructorCourses: async (): Promise<Course[]> => {
+    const response = await api.get('/courses/instructor');
+    return response.data;
   },
-  {
-    title: "MongoDB & Mongoose",
-    description: "Master MongoDB queries, aggregation, and Mongoose ODM.",
-    price: 99,
-    thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1068&q=80",
+
+  createCourse: async (data: FormData): Promise<Course> => {
+    const response = await api.post('/courses', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
   },
-];
+
+  getCourseModules: async (courseId: string): Promise<Module[]> => {
+    const response = await api.get(`/modules/course/${courseId}`);
+    return response.data;
+  },
+
+  getModuleLectures: async (moduleId: string): Promise<Lecture[]> => {
+    const response = await api.get(`/lectures/module/${moduleId}`);
+    return response.data;
+  },
+
+  getLecture: async (id: string): Promise<Lecture> => {
+    const response = await api.get(`/lectures/${id}`);
+    return response.data;
+  },
+
+  markAsCompleted: async (lectureId: string) => {
+    const response = await api.post(`/lectures/${lectureId}/complete`);
+    return response.data;
+  },
+};

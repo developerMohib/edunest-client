@@ -36,7 +36,7 @@ A robust **Express** application built with **TypeScript** and **MongoDB (Mongoo
 
 ## Project API Root
 
-### Bicycle APIs
+### courses APIs
 - **Create Course API**  
   - **Endpoint**: `/api/course`  
   - **Method**: `POST` 
@@ -55,11 +55,11 @@ A robust **Express** application built with **TypeScript** and **MongoDB (Mongoo
   - **Endpoint**: `/api/courses`  
   - **Method**: `GET`  
 
-- **Get Single Bicycle API**  
+- **Get Single courses API**  
   - **Endpoint**: `/api/course/:courseId`  
   - **Method**: `GET`  
 
-- **Update Bicycle API**  
+- **Update courses API**  
   - **Endpoint**: `/api/course/:courseId`  
   - **Method**: `PATCH` 
   - **Request Body**: 
@@ -69,7 +69,7 @@ A robust **Express** application built with **TypeScript** and **MongoDB (Mongoo
         "type": "listening"
     } 
 
-- **Delete Bicycle API**  
+- **Delete courses API**  
   - **Endpoint**: `/api/course/:courseId`  
   - **Method**: `DELETE`  
 

@@ -1,14 +1,33 @@
-import { products } from '@/utils/category';
+"use client";
+import { coursesApi } from '@/utils/courses';
+import { Course } from '@/utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHeart, FaShoppingCart, FaStar } from 'react-icons/fa';
 import { GiJumpAcross } from "react-icons/gi";
 
 const PopularCourse: React.FC = () => {
-  const pro = products
-  console.log("product ss", pro);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const data = await coursesApi.getCourses();
+        setCourses(data);
+      } catch (error) {
+        console.error("Failed to fetch courses", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  
   return (
     <div className="py-12">
       <div className="max-w-7xl mx-auto">
@@ -18,16 +37,16 @@ const PopularCourse: React.FC = () => {
 
         {/* Grid of Product Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-          {pro && pro.length > 0 ? (
+          {courses && courses.length > 0 ? (
             <>
-              {products?.map((product) => (
+              {courses?.slice(0,4).map((product) => (
                 <div
-                  key={product.id}
+                  key={product._id}
                   className="group relative shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-eduBorder/20 rounded-md"
                 >
                   <div className="relative overflow-hidden h-60">
                     <Image
-                      src={product.image}
+                      src={product.thumbnail}
                       alt={product.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       width={500}
@@ -44,13 +63,6 @@ const PopularCourse: React.FC = () => {
                         <FaShoppingCart /> Add to Cart
                       </button>
                     </div>
-                    {product.tag && (
-                      <span
-                        className={`${product.tag.color} text-eduWhite text-xs font-bold px-2 py-1 rounded-full absolute top-4 left-4`}
-                      >
-                        {product.tag.text}
-                      </span>
-                    )}
                   </div>
 
                   <div className="px-5 pt-5">
@@ -67,16 +79,16 @@ const PopularCourse: React.FC = () => {
                       <p className="text-lg font-bold text-eduBlue">
                         {product.price}
                       </p>
-                      {product.oldPrice && (
-                        <p className="text-xs text-eduGray line-through">
-                          {product.oldPrice}
-                        </p>
-                      )}
+
+                      <p className="text-xs text-eduGray line-through">
+                        old price
+                      </p>
+
                     </div>
                   </div>
 
                   <div className="p-5">
-                    <Link href={`/course-details/${product.id}`}>
+                    <Link href={`/course-details/${product._id}`}>
                       <button className="w-full bg-eduRed text-eduWhite py-2 rounded-lg font-medium hover:bg-eduBlue transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer">
                         View Details
                       </button>
@@ -85,7 +97,7 @@ const PopularCourse: React.FC = () => {
                 </div>
               ))}
             </>
-          ): (
+          ) : (
             <p>No products available.</p>
           )}
         </div>

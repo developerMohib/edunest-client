@@ -1,44 +1,41 @@
 "use client"
-import { signIn } from 'next-auth/react';
+import { api } from '@/utils/axiosInstance';
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const SignIn = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
-    const callbackUrl = useSearchParams().get('callbackUrl') || '/';
 
     const togglePassword = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setLoading(true);
-  const formData = new FormData(e.currentTarget);
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
-  const user = { email, password };
-  try {
-    const response = await signIn('credentials', { ...user, redirect: false, callbackUrl });
-    console.log('response fgchfgh', response);
-    if (response?.error) {
-      // Handle error (e.g., show message)
-      console.error('Sign in error:', response.error);
-    } else if (response?.ok) {
-      // Redirect or update UI on success
-      router.push(callbackUrl);
-    }
-  } catch (error) {
-    console.error(error);
-  } finally {
-    setLoading(false);
-  }
-};
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+        console.log(email, password);
+        try {
+            const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+            console.log("Login success:", res.data);
+
+            // store token
+            localStorage.setItem("token", res.data.token);
+            toast.success("Login Successful!");
+        } catch (err: any) {
+            console.error("Login failed:", err.response?.data || err.message);
+            toast.error(err.response?.data?.message || "Login failed");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="p-4">
@@ -71,6 +68,7 @@ const SignIn = () => {
                                         placeholder="name@example.com"
                                         required
                                         type="email"
+                                        name='email'
                                     />
                                 </div>
                                 <div className="grid gap-2">
@@ -87,6 +85,7 @@ const SignIn = () => {
                                             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  placeholder:text-muted-foreground"
                                             id="password"
                                             required
+                                            name='password'
                                             type={passwordVisible ? 'text' : 'password'}
                                         />
                                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">

@@ -1,10 +1,10 @@
 "use client"
 import Link from 'next/link';
 import React, { useState } from 'react';
-import ThemeChanger from './ThemeChanger';
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { LiaTimesSolid } from "react-icons/lia";
-import NameLogo from '@/ui/NameLogo';
+import NameLogo from '@/components/ui/NameLogo';
+import ThemeChanger from '../ui/ThemeChanger';
 // Navigation links data
 const navLinks = [
     { href: "/", label: "Home" },

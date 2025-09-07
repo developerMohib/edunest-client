@@ -61,7 +61,7 @@ UserSchema.pre<IUser>("save", async function (next) {
   next();
 });
 
-// 📌 Instance method to compare password
+// Instance method to compare password
 UserSchema.methods.comparePassword = async function (
   entryUserPass: string
 ): Promise<boolean> {

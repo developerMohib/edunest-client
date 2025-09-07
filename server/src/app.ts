@@ -3,10 +3,29 @@ import authRoutes from './routes/auth.routes';
 import courseRoutes from './routes/course.routes';
 import moduleRoutes from './routes/module.routes';
 import lectureRoutes from './routes/lecture.routes';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import connectDB from './config/db';
 
 const app = express();
 
+// Connect to database
+connectDB();
+
+// Middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  credentials: true, // Allow cookies to be sent
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use(bodyParser.json())
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Routes
 app.use('/api/auth', authRoutes);
