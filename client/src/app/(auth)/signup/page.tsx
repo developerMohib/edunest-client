@@ -1,10 +1,10 @@
-import CommingSoon from '@/components/ui/CommingSoon';
+import SignUp from '@/components/auth/SignUp';
 import React from 'react';
 
 const page: React.FC = () => {
     return (
         <div>
-            <CommingSoon />
+            <SignUp />
         </div>
     );
 };

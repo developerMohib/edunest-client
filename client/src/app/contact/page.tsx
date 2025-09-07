@@ -1,4 +1,4 @@
-import CommingSoon from '@/components/CommingSoon';
+import CommingSoon from '@/components/ui/CommingSoon';
 import React from 'react';
 
 const page: React.FC = () => {

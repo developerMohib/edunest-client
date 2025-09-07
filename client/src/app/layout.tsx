@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Outfit, Roboto } from "next/font/google";
 import "./globals.css";
-import Navber from "@/components/Navber";
-import Footer from "@/components/Footer";
+import Footer from "@/components/common/Footer";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "@/authprovider/AuthProvider";
+import Navber from "@/components/common/Navber";
 
 const outfit = Outfit({
   variable: "--font-outfit",

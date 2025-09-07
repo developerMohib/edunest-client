@@ -1,10 +1,9 @@
-import SignUp from '@/components/SignUp';
 import React from 'react';
 
-const page: React.FC = () => {
+const page = () => {
     return (
         <div>
-            <SignUp />
+            <h1>This is admin page </h1>
         </div>
     );
 };

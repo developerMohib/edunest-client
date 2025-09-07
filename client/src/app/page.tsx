@@ -1,7 +1,7 @@
-import Banner from "@/components/Banner";
-import Contact from "@/components/Contact";
-import PopularCourse from "@/components/PopularCourse";
-import Testominal from "@/components/Testominal";
+import Banner from "@/components/ui/Banner";
+import Contact from "@/components/ui/Contact";
+import PopularCourse from "@/components/ui/PopularCourse";
+import Testominal from "@/components/ui/Testominal";
 
 export default function Home() {
   return (
