@@ -1,12 +1,6 @@
-import config from "@/lib/config";
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "http://localhost:3000",
-});
-export default instance;
-
-const API_BASE_URL = config.nextPublicApiUrl || "http://localhost:5000/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 // Create axios instance
 export const api = axios.create({

@@ -5,6 +5,9 @@ import { AuthRequest } from '../middlewares/auth';
 import config from '../config/config';
 
 const generateToken = (id: string): string => {
+  if (!config.jwtSecret) {
+    throw new Error('JWT secret is not defined');
+  }
   return jwt.sign({ id }, config.jwtSecret, {
     expiresIn: '30d',
   });
@@ -64,6 +67,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
+    console.log('Login attempt:', email, password);
     if (!email || !password) {
       res.status(400).json({ message: 'Please provide email and password' });
       return;
@@ -76,11 +80,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       setAuthCookie(res, token);
 
       res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        image: user.image,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          image: user.image,
+        },
+        token,
       });
     } else {
       res.status(401).json({ message: 'Invalid email or password' });

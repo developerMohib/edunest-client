@@ -1,8 +1,8 @@
-import instance from "@/utils/axiosInstance";
+import { api } from "@/utils/axiosInstance";
 
 async function getAllCourse() {
   try {
-    const response = await instance.get('');
+    const response = await api.get('');
     console.log(response);
   } catch (error) {
     console.error(error);

@@ -1,6 +1,6 @@
 "use client"
 import { getErrorMessage } from '@/utils/axiosErrorHanlder';
-import instance from '@/utils/axiosInstance';
+import { api } from '@/utils/axiosInstance';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -58,7 +58,7 @@ const SignUp = () => {
         const userData = { name, email, password, image, role }
 
         try {
-            const response = await instance.post('/signup/api', userData)
+            const response = await api.post('/signup/api', userData)
             console.log('Sign up successful:', response.data);
             // Handle successful sign-up (e.g., redirect, show message)
             if (response?.data.success) {

@@ -1,8 +1,8 @@
 "use client"
 import { api } from '@/utils/axiosInstance';
-import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
@@ -14,6 +14,8 @@ const SignIn = () => {
     const togglePassword = () => {
         setPasswordVisible(!passwordVisible);
     };
+    const router = useRouter();
+    const callbackUrl = (router as any).searchParams?.get('callbackUrl') || '/';
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -21,14 +23,22 @@ const SignIn = () => {
         const formData = new FormData(e.currentTarget);
         const email = formData.get('email') as string;
         const password = formData.get('password') as string;
-        console.log(email, password);
-        try {
-            const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
-            console.log("Login success:", res.data);
 
+        try {
+            const res = await api.post("/auth/login", { email, password });
+            console.log("Login success:", res.data);
+            if (!res.data.token) {
+                throw new Error("No token received");
+            }
+            if (!res.data.user) {
+                throw new Error("No user data received");
+            }
+            if (res.data) {
+                toast.success("Login Successful!");
+                router.push(callbackUrl);
+                localStorage.setItem("token", res.data.token);
+            }
             // store token
-            localStorage.setItem("token", res.data.token);
-            toast.success("Login Successful!");
         } catch (err: any) {
             console.error("Login failed:", err.response?.data || err.message);
             toast.error(err.response?.data?.message || "Login failed");
@@ -59,7 +69,7 @@ const SignIn = () => {
                             <div className="grid gap-4">
 
                                 <div className="grid gap-2">
-                                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="email">
+                                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-roboto" htmlFor="email">
                                         Email
                                     </label>
                                     <input
@@ -73,7 +83,7 @@ const SignIn = () => {
                                 </div>
                                 <div className="grid gap-2">
                                     <div className="flex items-center">
-                                        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="password">
+                                        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-roboto" htmlFor="password">
                                             Password
                                         </label>
                                         <Link href="/" className="ml-auto inline-block text-sm underline text-muted-foreground hover:text-primary">

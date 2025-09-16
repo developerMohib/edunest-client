@@ -3,6 +3,7 @@ import config from "../config/config";
 import bcrypt from "bcrypt";
 // Define TypeScript interface
 export interface IUser extends Document {
+  _id: mongoose.Types.ObjectId;
   name: string;
   email: string;
   password: string;
@@ -60,7 +61,7 @@ UserSchema.pre<IUser>("save", async function (next) {
   next();
 });
 
-// 📌 Instance method to compare password
+// Instance method to compare password
 UserSchema.methods.comparePassword = async function (
   entryUserPass: string
 ): Promise<boolean> {

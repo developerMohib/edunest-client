@@ -1,10 +1,15 @@
 "use client"
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { LiaTimesSolid } from "react-icons/lia";
 import NameLogo from '@/components/ui/NameLogo';
 import ThemeChanger from '../ui/ThemeChanger';
+import Image from 'next/image';
+import Loading from '@/app/loading'
+import { useAuth } from '@/hooks/useAuth';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+
 // Navigation links data
 const navLinks = [
     { href: "/", label: "Home" },
@@ -15,6 +20,17 @@ const navLinks = [
 
 const Navber: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const {   logout } = useAuth();
+    const {user, refetch, isLoading } = useCurrentUser();
+    console.log("Session data:", user);
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
+    if (isLoading) {
+        return <Loading />; // or a spinner
+    }
+
     return (
         <header className="backdrop-blur-sm sticky top-0 z-50 w-full shadow">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,8 +54,24 @@ const Navber: React.FC = () => {
 
                     {/* CTA Button, Theme Toggle and Mobile Menu Toggle */}
                     <div className="flex items-center gap-4 ">
-                        <Link className="w-full text-center items-center justify-center rounded-md text-base font-semibold tracking-wide px-4 py-2 text-eduWhite bg-eduRed  hover:bg-eduGreen transition-colors duration-300 hidden md:block" href={'/signin'}> Login 
-                        </Link>
+
+                        {user ? (<div className="rounded-full overflow-hidden
+                            flex items-center justify-center border-2 border-eduGray">
+                            <Image
+                                src="https://i.ibb.co/Qv2rWPVX/istockphoto-1300845620-612x612.jpg"
+                                alt="User Avatar"
+                                width={500}
+                                height={300}
+                                className="object-cover w-8 h-auto"
+                            />
+                            <button
+                                onClick={() => logout()}
+                                className="ml-2 px-3 py-1 bg-red-500  rounded hover:bg-red-600 transition"
+                            >
+                                Logout
+                            </button>
+                        </div>) : (<Link className="w-full text-center items-center justify-center rounded-md text-base font-medium tracking-wide px-4 py-2 text-eduWhite bg-eduRed  hover:bg-eduGreen transition-colors duration-300 hidden md:block font-roboto" href={'/signin'}> Login
+                        </Link>)}
 
                         {/* Theme Toggle Button */}
                         <div ><ThemeChanger /></div>

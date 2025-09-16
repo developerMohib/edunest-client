@@ -3,9 +3,8 @@ import { Outfit, Roboto } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/common/Footer";
 import { Toaster } from "react-hot-toast";
-import AuthProvider from "@/authprovider/AuthProvider";
 import Navber from "@/components/common/Navber";
-
+import ReactQueryProvider from "@/provider/QueryProvider";
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -64,7 +63,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -73,14 +72,14 @@ export default function RootLayout({
     <html data-theme="light" lang="en">
       <body
         className={`${outfit.variable} ${roboto.variable} antialiased`}>
-        
-          <Navber />
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            {children}
-          </div>
-          <Footer />
-          <Toaster position="top-right" reverseOrder={false} />
-        
+          <ReactQueryProvider>
+            <Navber />
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              {children}
+            </div>
+            <Footer />
+            <Toaster position="top-right" reverseOrder={false} />
+          </ReactQueryProvider>
       </body>
     </html>
   );

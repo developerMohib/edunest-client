@@ -1,4 +1,4 @@
-import api from './axiosInstance';
+import { api } from './axiosInstance';
 import { RegisterData, User } from './types';
 
 export interface LoginData {

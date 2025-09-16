@@ -1,72 +1,61 @@
-import NextAuth, { Account, Profile, User } from "next-auth";
-import { CredentialInput } from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-import { AdapterUser } from "next-auth/adapters";
-import connectDB from "@/lib/db";
-import Facebook from "next-auth/providers/facebook";
+// app/api/auth/[...nextauth]/route.ts
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
+import { api } from "@/utils/axiosInstance";
 
-
-interface SignInParams {
-  user: AdapterUser | User;
-  account: Account | null;
-  profile?: Profile | undefined;
-  email?: {
-    verificationRequest?: boolean;
-  };
-  credentials?: Record<string, CredentialInput>;
-}
-
-const { db } = (await connectDB()) || { db: null };
-if (!db) throw new Error("Failed to connect to the database");
-// const userCollection = db.collection("Users");
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET, // server-only
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    Facebook({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        try {
+          const res = await api.post(`/auth/login`, {
+            email: credentials?.email,
+            password: credentials?.password,
+          });
+console.log("Authorize response:", res.data);
+
+          if (res.data) {
+            return res.data; // should return user object with token
+          }
+          return null;
+        } catch (err) {
+          console.error("Login error:", err);
+          return null;
+        }
+      },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id ?? user.id;
-        token.email = user.email;
+        token.accessToken = user.token; // save backend token in JWT
+        token.user = user;
       }
       return token;
     },
     async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = (token.id ?? token.id) as string;
-        session.user.email = token.email as string;
+      if (token) {
+        session.user = token.user;
+        session.accessToken = token.accessToken;
       }
       return session;
     },
-    async signIn({ user, account }: SignInParams) {
-      console.log("user 97", user, account);
-      if (
-        account?.provider === "google" ||
-        account?.provider === "facebook" 
-      ) {
-        // here you can check if the user exists in your database
-        }  else {
-        return true;
-      }
-    },
-  },
-   secret: process.env.NEXTAUTH_SECRET,
-
-  pages: {
-    signIn: "/signin",
   },
 };
+
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };
