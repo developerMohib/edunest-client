@@ -1,14 +1,12 @@
 "use client"
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { LiaTimesSolid } from "react-icons/lia";
 import NameLogo from '@/components/ui/NameLogo';
 import ThemeChanger from '../ui/ThemeChanger';
 import Image from 'next/image';
-import Loading from '@/app/loading'
 import { useAuth } from '@/hooks/useAuth';
-import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 // Navigation links data
 const navLinks = [
@@ -20,17 +18,17 @@ const navLinks = [
 
 const Navber: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    const {   logout } = useAuth();
-    const {user, refetch, isLoading } = useCurrentUser();
-    console.log("Session data:", user);
-    useEffect(() => {
-        refetch();
-    }, [refetch]);
+    const { logout } = useAuth();
+    // const { user, refetch, isLoading } = useCurrentUser();
+    // console.log("Session data:", user);
+    // useEffect(() => {
+    //     refetch();
+    // }, [refetch]);
 
-    if (isLoading) {
-        return <Loading />; // or a spinner
-    }
-
+    // if (isLoading) {
+    //     return <Loading />; // or a spinner
+    // }
+const user = false ;
     return (
         <header className="backdrop-blur-sm sticky top-0 z-50 w-full shadow">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
