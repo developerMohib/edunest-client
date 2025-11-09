@@ -1,9 +1,10 @@
+import CommingSoon from '@/components/ui/CommingSoon';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            <h1>This is admin page </h1>
+            <CommingSoon />
         </div>
     );
 };
