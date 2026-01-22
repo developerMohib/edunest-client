@@ -1,4 +1,4 @@
-import NameLogo from '@/components/ui/NameLogo';
+import NameLogo from '@/components/common/NameLogo';
 import Link from 'next/link';
 import React from 'react';
 import { FaFacebook, FaLinkedin, FaYoutube } from 'react-icons/fa';

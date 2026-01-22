@@ -10,6 +10,7 @@ const page = async (props: { params: Promise<{ id: string }> } ) => {
 
     try {
         course = await coursesApi.getCourse(id);
+        console.log('corse',course)
     } catch (err) {
         console.error("Error fetching course:", err);
     }
@@ -41,7 +42,7 @@ const page = async (props: { params: Promise<{ id: string }> } ) => {
                 <div className="mt-4 flex items-center gap-4">
                     <Image
                         src={course.instructor.image}
-                        alt={course.instructor.name}
+                        alt={course?.instructor?.name}
                         width={60}
                         height={60}
                         className="rounded-full"

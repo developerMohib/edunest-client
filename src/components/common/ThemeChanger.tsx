@@ -29,9 +29,14 @@ const ThemeChanger: React.FC = () => {
     }, [])
 
     return (
-        <button className='flex items-center'  onClick={handleTheme}>
-            {isDark ? <GiMoon className="text-2xl text-white" /> : <IoSunny className="text-2xl" />}
+        <button className="flex items-center transition-all duration-300" onClick={handleTheme}>
+            {isDark ? (
+                <GiMoon className="text-2xl text-white transition-all duration-300 rotate-180" />
+            ) : (
+                <IoSunny className="text-2xl transition-all duration-300 rotate-180" />
+            )}
         </button>
+
     );
 };
 

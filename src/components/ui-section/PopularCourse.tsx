@@ -27,7 +27,7 @@ const PopularCourse: React.FC = () => {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  
+
   return (
     <div className="py-12">
       <div className="max-w-7xl mx-auto">
@@ -39,66 +39,64 @@ const PopularCourse: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
           {courses && courses.length > 0 ? (
             <>
-              {courses?.slice(0,4).map((product) => (
+              {courses?.slice(0, 4).map((product) => (
                 <div
-                  key={product._id}
-                  className="group relative shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-eduBorder/20 rounded-md"
-                >
-                  <div className="relative overflow-hidden h-60">
-                    <Image
-                      src={product.thumbnail}
-                      alt={product.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      width={500}
-                      height={500}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute top-4 right-4">
-                      <button className="bg-eduWhite text-eduGray p-2 rounded-full shadow-md transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hover:bg-eduRed hover:text-eduWhite cursor-pointer">
-                        <FaHeart />
-                      </button>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <button className="w-full bg-eduBlue text-eduWhite py-2 rounded-lg font-medium hover:bg-eduGreen transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer">
-                        <FaShoppingCart /> Add to Cart
-                      </button>
-                    </div>
-                  </div>
+  key={product._id}
+  className="group relative shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-0.5 border border-eduBorder/20 rounded-md transition-all duration-500 ease-in-out"
+>
+  <div className="relative overflow-hidden h-60">
+    <Image
+      src={product.thumbnail}
+      alt={product.title}
+      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      width={500}
+      height={500}
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out" />
+    <div className="absolute top-4 right-4">
+      <button className="bg-eduWhite text-eduGray p-2 rounded-full shadow-md transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out hover:bg-eduRed hover:text-eduWhite cursor-pointer">
+        <FaHeart />
+      </button>
+    </div>
+    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+      <button className="w-full bg-eduBlue text-eduWhite py-2 rounded-lg font-medium hover:bg-eduGreen transition-colors duration-300 ease-in-out flex items-center justify-center gap-2 cursor-pointer">
+        <FaShoppingCart /> Add to Cart
+      </button>
+    </div>
+  </div>
 
-                  <div className="px-5 pt-5">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-lg font-bold text-eduBlack">
-                          {product.title}
-                        </h3>
-                        <p className="text-eduGray text-sm">{product.description}</p>
-                      </div>
-                    </div>
+  <div className="px-5 pt-5">
+    <div className="flex justify-between items-start">
+      <div>
+        <h3 className="text-lg font-bold text-eduBlack">
+          {product.title}
+        </h3>
+        <p className="text-eduGray text-sm">{product.description}</p>
+      </div>
+    </div>
 
-                    <div className="text-eduGreen gap-x-2 flex items-center">
-                      <p className="text-lg font-bold text-eduBlue">
-                        {product.price}
-                      </p>
+    <div className="text-eduGreen gap-x-2 flex items-center mt-2">
+      <p className="text-lg font-bold text-eduBlue">
+        {product.price}
+      </p>
+      <p className="text-xs text-eduGray line-through">
+        old price
+      </p>
+    </div>
+  </div>
 
-                      <p className="text-xs text-eduGray line-through">
-                        old price
-                      </p>
-
-                    </div>
-                  </div>
-
-                  <div className="p-5">
-                    <Link href={`/course-details/${product._id}`}>
-                      <button className="w-full bg-eduRed text-eduWhite py-2 rounded-lg font-medium hover:bg-eduBlue transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer">
-                        View Details
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+  <div className="p-5">
+    <Link href={`/course-details/${product._id}`}>
+      <button className="w-full bg-eduRed text-eduWhite py-2 rounded-lg font-medium hover:bg-eduBlue transition-colors duration-300 ease-in-out flex items-center justify-center gap-2 cursor-pointer">
+        View Details
+      </button>
+    </Link>
+  </div>
+</div>
               ))}
             </>
           ) : (
-            <p>No products available.</p>
+            <p className='min-h-screen flex items-center justify-center' >No products available.</p>
           )}
         </div>
 

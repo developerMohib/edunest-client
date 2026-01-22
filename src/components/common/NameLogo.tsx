@@ -7,7 +7,7 @@ const NameLogo: React.FC = () => {
         <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
                 <Image
-                    src="/images/edunest.new.logo.png"
+                    src="/images/edunest-r.png"
                     alt="Logo"
                     width={500}
                     height={500}

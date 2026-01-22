@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Roboto } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/common/Footer";
 import { Toaster } from "react-hot-toast";
-import Navber from "@/components/common/Navber";
 import ReactQueryProvider from "@/provider/QueryProvider";
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -44,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "EduNest",
     images: [
       {
-        url: "/og-image.png", // replace with your actual image path
+        url: "/edunest.png",
         width: 1200,
         height: 630,
         alt: "EduNest LMS Preview",
@@ -58,7 +56,7 @@ export const metadata: Metadata = {
     title: "EduNest - Modern Learning Management System",
     description:
       "Discover courses, manage your learning progress, and unlock knowledge with EduNest LMS.",
-    images: ["/og-image.png"], // replace with your image path
+    images: ["/edunest.png"], // replace with your image path
     creator: "@edunest",
   },
 };
@@ -72,14 +70,10 @@ export default async function RootLayout({
     <html data-theme="light" lang="en">
       <body
         className={`${outfit.variable} ${roboto.variable} antialiased`}>
-          <ReactQueryProvider>
-            <Navber />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              {children}
-            </div>
-            <Footer />
-            <Toaster position="top-right" reverseOrder={false} />
-          </ReactQueryProvider>
+        <ReactQueryProvider>
+          {children}
+          <Toaster position="top-right" reverseOrder={false} />
+        </ReactQueryProvider>{children}
       </body>
     </html>
   );

@@ -46,6 +46,14 @@
   }
 }
 
+/* Smooth theme transition */
+/* Add to your global CSS */
+@layer utilities {
+  .transition-smooth {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
 /* Apply variables to body */
 body {
   background: var(--background);
@@ -53,9 +61,13 @@ body {
   font-family: var(--font-outfit);
 }
 
-
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply text-eduBlack font-semibold;
   }
 

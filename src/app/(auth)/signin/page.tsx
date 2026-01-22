@@ -1,4 +1,4 @@
-import SignIn from "@/components/auth/SignIn";
+import SignIn from "@/components/pages/SignIn";
 
 const page: React.FC = () => {
 
