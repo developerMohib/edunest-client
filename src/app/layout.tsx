@@ -71,9 +71,11 @@ export default async function RootLayout({
       <body
         className={`${outfit.variable} ${roboto.variable} antialiased`}>
         <ReactQueryProvider>
-          {children}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {children}
+          </div>
           <Toaster position="top-right" reverseOrder={false} />
-        </ReactQueryProvider>{children}
+        </ReactQueryProvider>
       </body>
     </html>
   );
