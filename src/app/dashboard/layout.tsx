@@ -10,8 +10,8 @@ export default function DashboardLayout({
 }) {
     return (
         <main className="py-6">
-      <DashboardSidebar />
-        <DashboardHeader />
+            <DashboardSidebar />
+            <DashboardHeader />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Suspense
                     fallback={
