@@ -8,31 +8,6 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from 'react-icons/fa6';
-export const metadata = {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
-    title: 'Sign Up - Your App',
-    description: 'Create an account to access our services.',
-    openGraph: {
-        title: 'Sign Up - Your App',
-        description: 'Create an account to access our services.',
-        url: '/signup',
-        images: [
-            {
-                url: '/og-image.jpg', // Relative path resolved by metadataBase
-                width: 1200,
-                height: 630,
-                alt: 'Sign Up Page Image',
-            },
-        ],
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Sign Up - Your App',
-        description: 'Create an account to access our services.',
-        images: ['/og-image.jpg'], // Relative path resolved by metadataBase
-    },
-};
 
 const SignUp = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
