@@ -1,10 +1,12 @@
 
-const page = () => {
-    return (
-        <div>
-            <h1>This is the Dashboard Page</h1>
-        </div>
-    );
-};
+export default async function DashboardPage() {
+    const role = "admin";
 
-export default page;
+    if (role === "admin") {
+        return <h1>Welcome Admin 👑</h1>;
+    }
+    if (role === "manager") {
+        return <h1>Manager Dashboard 📊</h1>;
+    }
+    return <h1>User Dashboard 🙋</h1>;
+}

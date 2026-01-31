@@ -3,6 +3,8 @@ import { Outfit, Roboto } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import ReactQueryProvider from "@/provider/QueryProvider";
+import Footer from "@/components/common/Footer";
+import Navber from "@/components/common/Navber";
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -71,9 +73,11 @@ export default async function RootLayout({
       <body
         className={`${outfit.variable} ${roboto.variable} antialiased`}>
         <ReactQueryProvider>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <Navber />
+          <main className="container mx-auto px-4 sm:px-6 lg:px-8">
             {children}
-          </div>
+          </main>
+          <Footer />
           <Toaster position="top-right" reverseOrder={false} />
         </ReactQueryProvider>
       </body>

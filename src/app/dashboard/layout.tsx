@@ -1,18 +1,20 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import DashboardSidebar from "@/components/common/DashboardSidebar";
-import { ReactNode, Suspense } from "react";
+import { Suspense } from "react";
 import { TbLoader2 } from "react-icons/tb";
+
+
 
 export default function DashboardLayout({
     children,
 }: {
-    children: ReactNode;
+    children: React.ReactNode;
 }) {
     return (
-        <main className="py-6">
+        <div className="flex h-screen">
             <DashboardSidebar />
-            <DashboardHeader />
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col flex-1">
+                <DashboardHeader />
                 <Suspense
                     fallback={
                         <div className="flex justify-center py-12">
@@ -23,6 +25,6 @@ export default function DashboardLayout({
                     {children}
                 </Suspense>
             </div>
-        </main>
-    )
+        </div>
+    );
 }
